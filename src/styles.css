@@ -107,8 +107,50 @@
 }
 
 .dark {
-  /* Same — site is dark by default */
   color-scheme: dark;
+}
+
+/* Light theme overrides */
+.light {
+  color-scheme: light;
+
+  --background: oklch(0.985 0.003 200);
+  --foreground: oklch(0.18 0.012 215);
+
+  --surface: oklch(0.96 0.005 210);
+  --surface-elevated: oklch(0.99 0.003 210);
+  --hairline: oklch(0.2 0.01 215 / 12%);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.012 215);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.012 215);
+
+  --primary: oklch(0.55 0.13 200);
+  --primary-foreground: oklch(0.99 0.003 200);
+  --primary-glow: oklch(0.65 0.14 195);
+  --primary-deep: oklch(0.42 0.12 205);
+
+  --secondary: oklch(0.93 0.008 215);
+  --secondary-foreground: oklch(0.18 0.012 215);
+
+  --muted: oklch(0.94 0.006 215);
+  --muted-foreground: oklch(0.42 0.014 220);
+
+  --accent: oklch(0.93 0.008 215);
+  --accent-foreground: oklch(0.18 0.012 215);
+
+  --border: oklch(0.2 0.01 215 / 12%);
+  --input: oklch(0.2 0.01 215 / 14%);
+  --ring: oklch(0.55 0.13 200);
+
+  --gradient-text: linear-gradient(
+    180deg,
+    oklch(0.2 0.012 215) 0%,
+    oklch(0.45 0.014 220) 100%
+  );
+
+  --shadow-glow: 0 0 60px -10px oklch(0.55 0.13 200 / 0.25);
 }
 
 @layer base {
@@ -220,14 +262,13 @@
   }
 }
 
-/* Avatar idle motion */
-@keyframes float-y {
+/* Avatar idle motion — gentle, no jump */
+@keyframes float-soft {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
+  50% { transform: translateY(-6px); }
 }
-@keyframes blink {
-  0%, 92%, 100% { transform: scaleY(1); opacity: 1; }
-  94%, 96% { transform: scaleY(0.05); opacity: 1; }
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
 }
 @keyframes pulse-ring {
   0% { transform: scale(0.95); opacity: 0.6; }
@@ -237,11 +278,10 @@
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
 
-.animate-float { animation: float-y 6s ease-in-out infinite; }
-.animate-blink { animation: blink 5s ease-in-out infinite; transform-origin: center; }
+.animate-float-soft {
+  animation: float-soft 7s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  will-change: transform;
+}
+.animate-spin-slow { animation: spin-slow 22s linear infinite; }
 .animate-pulse-ring { animation: pulse-ring 2.4s cubic-bezier(0.22, 1, 0.36, 1) infinite; }

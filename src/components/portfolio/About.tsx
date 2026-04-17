@@ -1,26 +1,30 @@
 import { motion } from "framer-motion";
 import { SectionHeader } from "./SectionHeader";
-
-const facts = [
-  { k: "Age", v: "21" },
-  { k: "Based in", v: "North Macedonia" },
-  { k: "Studying", v: "Software Engineering · FINKI" },
-  { k: "Year", v: "3rd" },
-  { k: "Focus", v: "Full-stack web · modern frontend" },
-  { k: "Open to", v: "Internships · freelance · roles" },
-];
+import { useApp } from "./AppContext";
+import type { TKey } from "./AppContext";
 
 export function About() {
+  const { t } = useApp();
+
+  const facts: { k: TKey; v: TKey }[] = [
+    { k: "about.f.age", v: "about.f.age.v" },
+    { k: "about.f.based", v: "about.f.based.v" },
+    { k: "about.f.studying", v: "about.f.studying.v" },
+    { k: "about.f.year", v: "about.f.year.v" },
+    { k: "about.f.focus", v: "about.f.focus.v" },
+    { k: "about.f.open", v: "about.f.open.v" },
+  ];
+
   return (
     <section id="about" className="relative px-6 py-32 sm:py-40">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
           index="02"
-          eyebrow="About"
+          eyebrow={t("about.eyebrow")}
           title={
             <>
-              A young engineer building{" "}
-              <span className="text-accent-gradient">real things.</span>
+              {t("about.title.a")}
+              <span className="text-accent-gradient">{t("about.title.b")}</span>
             </>
           }
         />
@@ -33,24 +37,9 @@ export function About() {
             transition={{ duration: 0.7 }}
             className="space-y-6 text-lg leading-relaxed text-muted-foreground lg:col-span-7"
           >
-            <p className="text-pretty text-foreground/90">
-              I'm Leo — a 21-year-old software engineering student at FINKI,
-              currently in my 3rd year. I care about clean execution, real
-              products, and the small details that separate a finished site
-              from a great one.
-            </p>
-            <p className="text-pretty">
-              My work spans both ends: collaborative technical projects with
-              microservices and data pipelines, and polished business-facing
-              sites delivered for real clients. I like working close to the
-              user — but I'm just as happy reasoning about systems behind the
-              scenes.
-            </p>
-            <p className="text-pretty">
-              I'm focused on growing into a strong full-stack engineer,
-              shipping more production work, and learning fast from the people
-              I build with.
-            </p>
+            <p className="text-pretty text-foreground/90">{t("about.p1")}</p>
+            <p className="text-pretty">{t("about.p2")}</p>
+            <p className="text-pretty">{t("about.p3")}</p>
           </motion.div>
 
           <motion.div
@@ -65,13 +54,13 @@ export function About() {
                 {facts.map((f) => (
                   <div
                     key={f.k}
-                    className="flex items-center justify-between px-4 py-3.5"
+                    className="flex items-center justify-between gap-4 px-4 py-3.5"
                   >
                     <dt className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                      {f.k}
+                      {t(f.k)}
                     </dt>
                     <dd className="text-right text-sm font-medium text-foreground">
-                      {f.v}
+                      {t(f.v)}
                     </dd>
                   </div>
                 ))}

@@ -1,41 +1,28 @@
 import { motion } from "framer-motion";
 import { Rocket, Users, Layers, Sparkles } from "lucide-react";
 import { SectionHeader } from "./SectionHeader";
+import { useApp } from "./AppContext";
+import type { TKey } from "./AppContext";
 
-const items = [
-  {
-    icon: Rocket,
-    title: "Real, shipped work",
-    body: "Live business sites in production, not tutorial clones. Every project here is something you can open in a tab right now.",
-  },
-  {
-    icon: Users,
-    title: "Team-built systems",
-    body: "I've worked inside collaborative codebases — microservices, branches, code review, deployment — not just solo experiments.",
-  },
-  {
-    icon: Layers,
-    title: "Both ends of the stack",
-    body: "Comfortable from frontend craft and UI polish to backend services, data, and Docker-based deployment.",
-  },
-  {
-    icon: Sparkles,
-    title: "I learn fast & ship",
-    body: "I move quickly, take feedback seriously, and put the work in to raise the bar on every next project.",
-  },
+const items: { icon: typeof Rocket; tKey: TKey; bKey: TKey }[] = [
+  { icon: Rocket, tKey: "proof.1.t", bKey: "proof.1.b" },
+  { icon: Users, tKey: "proof.2.t", bKey: "proof.2.b" },
+  { icon: Layers, tKey: "proof.3.t", bKey: "proof.3.b" },
+  { icon: Sparkles, tKey: "proof.4.t", bKey: "proof.4.b" },
 ];
 
 export function Proof() {
+  const { t } = useApp();
   return (
     <section className="relative px-6 py-32 sm:py-40">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
           index="04"
-          eyebrow="What I bring"
+          eyebrow={t("proof.eyebrow")}
           title={
             <>
-              Proof over{" "}
-              <span className="text-accent-gradient">promises.</span>
+              {t("proof.title.a")}
+              <span className="text-accent-gradient">{t("proof.title.b")}</span>
             </>
           }
         />
@@ -45,7 +32,7 @@ export function Proof() {
             const Icon = it.icon;
             return (
               <motion.div
-                key={it.title}
+                key={it.tKey}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
@@ -56,10 +43,10 @@ export function Proof() {
                   <Icon className="h-5 w-5" />
                 </div>
                 <h3 className="font-display text-xl font-semibold tracking-tight">
-                  {it.title}
+                  {t(it.tKey)}
                 </h3>
                 <p className="mt-3 text-pretty leading-relaxed text-muted-foreground">
-                  {it.body}
+                  {t(it.bKey)}
                 </p>
               </motion.div>
             );
