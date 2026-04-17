@@ -1,45 +1,52 @@
 import { motion } from "framer-motion";
 import { SectionHeader } from "./SectionHeader";
+import { useApp } from "./AppContext";
+import type { TKey } from "./AppContext";
 
-const groups = [
+const groups: { labelKey: TKey; items: string[] }[] = [
   {
-    label: "Frontend",
-    items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "HTML / CSS"],
+    labelKey: "stack.languages",
+    items: ["TypeScript", "JavaScript", "Java", "Python", "C++", "C#"],
   },
   {
-    label: "Backend",
-    items: ["Node.js", "Express", "Spring Boot", "Python", "REST APIs", "Java"],
+    labelKey: "stack.frontend",
+    items: ["React", "Next.js", "Tailwind CSS", "Framer Motion", "HTML / CSS"],
   },
   {
-    label: "Databases",
+    labelKey: "stack.backend",
+    items: ["Node.js", "Express", "Spring Boot", "REST APIs"],
+  },
+  {
+    labelKey: "stack.databases",
     items: ["PostgreSQL", "MongoDB", "MySQL", "Redis"],
   },
   {
-    label: "Tools / DevOps",
+    labelKey: "stack.tools",
     items: ["Git", "Docker", "Docker Compose", "Azure", "Vercel", "Linux"],
   },
 ];
 
 export function Stack() {
+  const { t } = useApp();
   return (
     <section id="stack" className="relative px-6 py-32 sm:py-40">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
           index="03"
-          eyebrow="Stack"
+          eyebrow={t("stack.eyebrow")}
           title={
             <>
-              Tools I reach for —{" "}
-              <span className="text-accent-gradient">honest about it.</span>
+              <span className="text-accent-gradient">{t("stack.title.a")}</span>
+              {t("stack.title.b")}
             </>
           }
-          description="A working stack I use across studies, side projects, and client work. No padding, no buzzwords."
+          description={t("stack.desc")}
         />
 
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
           {groups.map((g, i) => (
             <motion.div
-              key={g.label}
+              key={g.labelKey}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
@@ -49,7 +56,7 @@ export function Stack() {
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
               <div className="flex items-center justify-between">
                 <h3 className="font-display text-lg font-semibold tracking-tight">
-                  {g.label}
+                  {t(g.labelKey)}
                 </h3>
                 <span className="font-mono text-[10px] text-muted-foreground">
                   0{i + 1}

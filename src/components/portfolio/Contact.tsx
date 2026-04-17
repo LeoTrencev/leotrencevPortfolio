@@ -1,9 +1,11 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight, Github, Linkedin, Mail, Copy, Check } from "lucide-react";
+import { ArrowUpRight, Github, Linkedin, Mail, Copy, Check, Instagram } from "lucide-react";
 import { useState } from "react";
+import { useApp } from "./AppContext";
 
 export function Contact() {
   const [copied, setCopied] = useState(false);
+  const { t } = useApp();
   const email = "leotrencev@gmail.com";
 
   const copy = async () => {
@@ -30,18 +32,17 @@ export function Contact() {
       >
         <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-hairline bg-surface/60 px-3 py-1.5 text-xs text-muted-foreground backdrop-blur-md">
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-          Open to opportunities
+          {t("contact.badge")}
         </div>
 
         <h2 className="text-balance font-display text-5xl font-semibold leading-[1] tracking-tight sm:text-6xl md:text-8xl">
-          Let's build{" "}
-          <span className="text-accent-gradient italic">something</span>
+          {t("contact.title.a")}
+          <span className="text-accent-gradient italic">{t("contact.title.b")}</span>
           <br />
-          worth shipping.
+          {t("contact.title.c")}
         </h2>
         <p className="mx-auto mt-7 max-w-2xl text-pretty leading-relaxed text-muted-foreground sm:text-lg">
-          Hiring, freelance projects, or just a good idea — I'd love to hear
-          about it. The fastest way to reach me is email.
+          {t("contact.desc")}
         </p>
 
         <div className="mt-12 inline-flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
@@ -61,18 +62,18 @@ export function Contact() {
             {copied ? (
               <>
                 <Check className="h-4 w-4 text-primary" />
-                Copied
+                {t("contact.copied")}
               </>
             ) : (
               <>
                 <Copy className="h-4 w-4" />
-                Copy
+                {t("contact.copy")}
               </>
             )}
           </button>
         </div>
 
-        <div className="mt-10 flex items-center justify-center gap-6">
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
           <a
             href="https://github.com/LeoTrencev"
             target="_blank"
@@ -83,7 +84,7 @@ export function Contact() {
             GitHub
             <ArrowUpRight className="h-3.5 w-3.5 opacity-0 transition-all group-hover:opacity-100 group-hover:-translate-y-0.5" />
           </a>
-          <span className="h-4 w-px bg-hairline" />
+          <span className="hidden h-4 w-px bg-hairline sm:block" />
           <a
             href="https://www.linkedin.com/in/leo-trenchev-2322623ba/"
             target="_blank"
@@ -92,6 +93,17 @@ export function Contact() {
           >
             <Linkedin className="h-4 w-4" />
             LinkedIn
+            <ArrowUpRight className="h-3.5 w-3.5 opacity-0 transition-all group-hover:opacity-100 group-hover:-translate-y-0.5" />
+          </a>
+          <span className="hidden h-4 w-px bg-hairline sm:block" />
+          <a
+            href="https://www.instagram.com/leotrencev/"
+            target="_blank"
+            rel="noreferrer"
+            className="group inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <Instagram className="h-4 w-4" />
+            Instagram
             <ArrowUpRight className="h-3.5 w-3.5 opacity-0 transition-all group-hover:opacity-100 group-hover:-translate-y-0.5" />
           </a>
         </div>

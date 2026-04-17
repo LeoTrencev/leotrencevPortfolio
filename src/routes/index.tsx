@@ -10,6 +10,7 @@ import { Contact } from "@/components/portfolio/Contact";
 import { Footer } from "@/components/portfolio/Footer";
 import { LoadingScreen } from "@/components/portfolio/LoadingScreen";
 import { CursorGlow } from "@/components/portfolio/CursorGlow";
+import { AppProvider } from "@/components/portfolio/AppContext";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -35,18 +36,20 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <main className="relative bg-background text-foreground">
-      <LoadingScreen />
-      <CursorGlow />
-      <Navbar />
-      <Hero />
-      <Marquee />
-      <Projects />
-      <About />
-      <Stack />
-      <Proof />
-      <Contact />
-      <Footer />
-    </main>
+    <AppProvider>
+      <main className="relative bg-background text-foreground">
+        <LoadingScreen />
+        <CursorGlow />
+        <Navbar />
+        <Hero />
+        <Marquee />
+        <Projects />
+        <About />
+        <Stack />
+        <Proof />
+        <Contact />
+        <Footer />
+      </main>
+    </AppProvider>
   );
 }
