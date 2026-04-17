@@ -2,10 +2,11 @@ import { Suspense, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF, Environment, ContactShadows } from "@react-three/drei";
 import type { Group } from "three";
+import avatarUrl from "@/assets/avatar.glb?url";
 
 function Model() {
   const ref = useRef<Group>(null);
-  const { scene } = useGLTF("/models/avatar.glb");
+  const { scene } = useGLTF(avatarUrl);
 
   useFrame((state) => {
     if (!ref.current) return;
@@ -22,7 +23,7 @@ function Model() {
   );
 }
 
-useGLTF.preload("/models/avatar.glb");
+useGLTF.preload(avatarUrl);
 
 export function Avatar3D() {
   return (
