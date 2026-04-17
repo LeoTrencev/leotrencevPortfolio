@@ -1,9 +1,12 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, lazy, Suspense } from "react";
 import { ArrowUpRight, Github, Mail } from "lucide-react";
-import avatar from "@/assets/avatar-leo.png";
 import heroGlow from "@/assets/hero-glow.jpg";
 import { useApp } from "./AppContext";
+
+const Avatar3D = lazy(() =>
+  import("./Avatar3D").then((m) => ({ default: m.Avatar3D })),
+);
 
 export function Hero() {
   const ref = useRef<HTMLDivElement>(null);
@@ -133,14 +136,10 @@ export function Hero() {
             <div className="absolute inset-10 rounded-full border border-primary/20" />
             <div className="absolute inset-16 rounded-full border border-hairline" />
 
-            <div className="relative h-full w-full animate-float-soft">
-              <img
-                src={avatar}
-                alt="Leo Trencev avatar"
-                width={1024}
-                height={1024}
-                className="relative z-10 h-full w-full object-contain drop-shadow-[0_30px_60px_oklch(0_0_0/0.45)]"
-              />
+            <div className="relative z-10 h-full w-full">
+              <Suspense fallback={null}>
+                <Avatar3D />
+              </Suspense>
             </div>
 
             {/* Floating chips */}
